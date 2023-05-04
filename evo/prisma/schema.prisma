@@ -1,0 +1,106 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+//níveis de acesso
+
+
+//tipos de documentos
+enum DocRole {
+  cpf
+  cnpj
+  caepf
+  cno
+  cei
+}
+
+model User {
+  id Int @id @default(autoincrement())
+
+  email    String @unique
+  password String
+
+  name String
+}
+
+model pessoas {
+  id           String    @id @default(uuid())
+  nome         String
+  tipo_doc     DocRole?   @default(cpf)
+  numero_doc   String
+  rg           String
+  rg_emissor   String
+  nascimento   String?
+  genero       String
+  email        String
+  email_sec    String?
+  tel          String
+  tel_sec      String?
+  cep          String
+  cidade       String
+  estado       String
+  bairro       String
+  rua          String
+  numero       String
+  complemento  String?
+
+  cargo        cargos?     @relation(fields: [cargoId], references: [id])
+  cargoId      String?
+
+  empresa      empresas?     @relation(fields: [empresaId], references: [id])
+  empresaId    String?
+}
+
+
+
+model cargos {
+  id              String    @id @default(uuid())
+  nome            String
+  cor             String?
+  cbo             String?
+  aptidao         String?
+  ambiente        String?
+  informacao      String?
+  atividade       String?
+  carga_horaria   String?
+
+  empresa         empresas?     @relation(fields: [empresaId], references: [id])
+  empresaId       String?
+
+  pessoas         pessoas[]
+}
+
+
+
+model empresas {
+  id              String    @id @default(uuid())
+  rasao_social    String
+  nome_fantasia   String
+  tipo_doc        DocRole   @default(cnpj)
+  numero_doc      String
+  data_registro   String
+  email           String
+  email_sec       String?
+  tel             String
+  tel_sec         String?
+  cep             String
+  cidade          String
+  estado          String
+  bairro          String
+  rua             String
+  numero          String
+  complemento     String?
+  estabelecimento String?
+
+  cargos          cargos[]
+
+  pessoas         pessoas[]
+}
