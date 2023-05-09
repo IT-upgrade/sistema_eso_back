@@ -36,7 +36,7 @@ export class ParecerTecnicoService {
       throw new Error('Parecer Tecnico não existe!');
     }
 
-    await this.prisma.infoComplementar.update({
+    await this.prisma.parecerTecnico.update({
       data,
       where: {
         id,
@@ -45,7 +45,7 @@ export class ParecerTecnicoService {
   }
 
   async delete(id: string) {
-    const infoExists = await this.prisma.infoComplementar.findUnique({
+    const infoExists = await this.prisma.parecerTecnico.findUnique({
       where: {
         id,
       },
@@ -55,7 +55,7 @@ export class ParecerTecnicoService {
       throw new Error('Informação Complementar não existe.');
     }
 
-    return await this.prisma.infoComplementar.delete({
+    return await this.prisma.parecerTecnico.delete({
       where: {
         id,
       },
