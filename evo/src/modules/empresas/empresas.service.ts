@@ -4,7 +4,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class EmpresasService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private prisma: PrismaService) { }
 
   async create(data: EmpresasDTO) {
     const empresaExists = await this.prisma.empresas.findFirst({
@@ -65,17 +65,21 @@ export class EmpresasService {
     const empresaExists = await this.prisma.empresas.findUnique({
       where: {
         id,
-      },
+      }
     });
 
     if (!empresaExists) {
       throw new Error('Empresa não existe!');
     }
 
-    return await this.prisma.empresas.findUnique({
+    return await this.prisma.empresas.findFirst({
       where: {
         id,
       },
+
+      include: {
+        cargos: true
+      }
     });
   }
 }

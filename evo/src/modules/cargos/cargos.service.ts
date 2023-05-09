@@ -7,14 +7,16 @@ export class CargosService {
   constructor(private prisma: PrismaService) {}
 
   async create(data: CargosDTO) {
-    const cargoExists = await this.prisma.cargos.findFirst({
-      where: {
-        id: data.id,
-      },
-    });
-    if (cargoExists) {
-      throw new Error('Cargo já cadastrado');
-    }
+
+    // console.log(data)
+    // const cargoExists = await this.prisma.cargos.findFirst({
+    //   where: {
+    //     id: data.id,
+    //   },
+    // });
+    // if (cargoExists) {
+    //   throw new Error('Cargo já cadastrado');
+    // }
 
     const cargos = await this.prisma.cargos.create({
       data,

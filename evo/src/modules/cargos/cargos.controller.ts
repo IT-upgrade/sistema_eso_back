@@ -14,12 +14,12 @@ import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 
 @Controller('cargos')
 export class CargosController {
-  constructor(private readonly cargosService: CargosService) {}
+  constructor(private readonly cargosService: CargosService) { }
 
   @Post('cadastro')
   @UseGuards(JwtAuthGuard)
   async create(@Body() data: CargosDTO) {
-    return this.cargosService.create(data);
+    return this.cargosService.create(data.data);
   }
 
   @Get()
@@ -31,7 +31,7 @@ export class CargosController {
   @Put(':id')
   @UseGuards(JwtAuthGuard)
   async update(@Param('id') id: string, @Body() data: CargosDTO) {
-    return this.cargosService.update(id, data);
+    return this.cargosService.update(id, data.data);
   }
 
   @Delete(':id')

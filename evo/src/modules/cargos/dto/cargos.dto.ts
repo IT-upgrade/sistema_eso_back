@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
 export type CargosDTO = {
+  data: CargosDTO
   id: string;
   nome: string;
   cor: string | null;
