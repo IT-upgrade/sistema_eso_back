@@ -60,4 +60,22 @@ export class EmpresasService {
       },
     });
   }
+
+  async getById(id: string) {
+    const empresaExists = await this.prisma.empresas.findUnique({
+      where: {
+        id,
+      },
+    });
+
+    if (!empresaExists) {
+      throw new Error('Empresa não existe!');
+    }
+
+    return await this.prisma.empresas.findUnique({
+      where: {
+        id,
+      },
+    });
+  }
 }

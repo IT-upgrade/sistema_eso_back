@@ -9,6 +9,8 @@ import { UserModule } from './modules/user/user.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from './modules/auth/guards/jwt-auth.guard';
+import { InfoComplementarModule } from './info-complementar/info-complementar.module';
+import { ParecerTecnicoModule } from './modules/parecer-tecnico/parecer-tecnico.module';
 
 @Module({
   imports: [
@@ -19,6 +21,8 @@ import { JwtAuthGuard } from './modules/auth/guards/jwt-auth.guard';
     EmpresasModule,
     CargosModule,
     AuthModule,
+    InfoComplementarModule,
+    ParecerTecnicoModule,
   ],
   controllers: [AppController],
   providers: [

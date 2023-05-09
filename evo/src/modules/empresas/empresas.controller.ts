@@ -10,7 +10,6 @@ import {
 } from '@nestjs/common';
 import { EmpresasService } from './empresas.service';
 import { EmpresasDTO } from './dto/empresas.dto';
-
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 
 @Controller('empresas')
@@ -33,6 +32,12 @@ export class EmpresasController {
   @UseGuards(JwtAuthGuard)
   async update(@Param('id') id: string, @Body() data: EmpresasDTO) {
     return this.empresasService.update(id, data);
+  }
+
+  @Get(':id')
+  @UseGuards(JwtAuthGuard)
+  async getById(@Param('id') id: string) {
+    return this.empresasService.getById(id);
   }
 
   @Delete(':id')

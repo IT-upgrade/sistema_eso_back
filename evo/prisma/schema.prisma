@@ -10,8 +10,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-//níveis de acesso
-
 
 //tipos de documentos
 enum DocRole {
@@ -23,12 +21,10 @@ enum DocRole {
 }
 
 model User {
-  id Int @id @default(autoincrement())
-
-  email    String @unique
-  password String
-
-  name String
+  id          Int @id @default(autoincrement())
+  email       String @unique
+  password    String
+  name        String
 }
 
 model pessoas {
@@ -76,7 +72,23 @@ model cargos {
   empresaId       String?
 
   pessoas         pessoas[]
+
+  parecerTecnico   parecerTecnico[]
 }
+
+
+
+model parecerTecnico {
+  id                 String    @id @default(uuid())
+  periculosidade     String
+  ltcat              String?
+  risco              String?
+  recomendacao       String?
+
+  cargo              cargos?       @relation(fields: [cargoId], references: [id])
+  cargoId            String?
+}
+
 
 
 
