@@ -2,6 +2,7 @@
 import { DocRole } from "@prisma/client";
 
 export type EmpresasDTO = {
+  data: EmpresasDTO;
   id: string;
   rasao_social: string;
   nome_fantasia: string;

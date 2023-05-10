@@ -19,7 +19,7 @@ export class EmpresasController {
   @Post('cadastro')
   @UseGuards(JwtAuthGuard)
   async create(@Body() data: EmpresasDTO) {
-    return this.empresasService.create(data);
+    return this.empresasService.create(data.data);
   }
 
   @Get()
@@ -31,7 +31,7 @@ export class EmpresasController {
   @Put(':id')
   @UseGuards(JwtAuthGuard)
   async update(@Param('id') id: string, @Body() data: EmpresasDTO) {
-    return this.empresasService.update(id, data);
+    return this.empresasService.update(id, data.data);
   }
 
   @Get(':id')
